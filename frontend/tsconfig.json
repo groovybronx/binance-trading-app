@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "ESNext", // Cible ECMAScript (ESNext pour les dernières fonctionnalités)
+      "module": "ESNext", // Module système (ESNext pour les modules ES)
+      "jsx": "react-jsx", // Support JSX pour React
+      "strict": true, // Active toutes les vérifications de type strictes
+      "esModuleInterop": true, // Permet l'interopérabilité entre CommonJS et ES modules
+      "skipLibCheck": true, // Ignore la vérification des fichiers de déclaration (.d.ts)
+      "forceConsistentCasingInFileNames": true, // Force la cohérence de la casse dans les noms de fichiers
+      "moduleResolution": "node", // Résolution des modules comme Node.js
+      "resolveJsonModule": true, // Permet d'importer des fichiers JSON
+      "isolatedModules": true, // Assure que chaque fichier est un module isolé
+      "noEmit": true // Ne génère pas de fichiers JavaScript (utilisé avec Vite)
+    },
+    "include": ["src"] // Inclut tous les fichiers dans le dossier `src/`
+  }

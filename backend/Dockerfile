@@ -1,14 +1,13 @@
-FROM node:18-alpine
-
-# Installer les dépendances système nécessaires
-RUN apk add --no-cache python3 make g++
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install
+# Installer les dépendances système pour bcrypt
+RUN apt-get update && apt-get install -y gcc python3-dev
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 8000
-CMD ["npm", "start"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
