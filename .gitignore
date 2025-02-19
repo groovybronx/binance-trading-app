@@ -1,0 +1,56 @@
+# Fichiers spécifiques à l'environnement
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Fichiers de configuration VS Code
+.vscode/
+
+# Dossiers de dépendances
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Dossiers de build
+dist/
+build/
+out/
+*.egg-info/
+
+# Fichiers de cache
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Fichiers de logs
+*.log
+logs/
+
+# Fichiers de sauvegarde
+*.bak
+*.swp
+*.swo
+
+# Fichiers spécifiques à Docker
+docker-compose.override.yml
+
+# Fichiers spécifiques à MongoDB
+/data/db/
+
+# Fichiers spécifiques à React
+/public/
+/src/serviceWorker.js
+/src/setupTests.js
+
+# Fichiers spécifiques à Python
+venv/
+*.venv/
+Pipfile
+Pipfile.lock
