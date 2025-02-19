@@ -1,5 +1,5 @@
 # Étape 1 : Utiliser une image de base Node.js
-FROM node:18-alpine AS build
+FROM node:18-alpine as build
 
 # Étape 2 : Définir le répertoire de travail
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Étape 8 : Copier les fichiers construits dans le serveur Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Étape 9 : Exposer le port 80
 EXPOSE 80
