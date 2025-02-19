@@ -1,4 +1,3 @@
-Votre fichier `README.md` est actuellement vide. Voici un exemple de structure pour documenter votre projet :
 
 ```markdown
 # Binance Trading App
