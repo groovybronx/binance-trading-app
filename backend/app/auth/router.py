@@ -1,36 +1,35 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from app.db.models.user import User
+from app.db.mongodb import mongodb
 from .utils import hash_password, verify_password
-from pydantic import BaseModel
 
 router = APIRouter()
 
-# Simuler une base de données (remplacez par MongoDB plus tard)
-fake_users_db = {}
-
-class User(BaseModel):
-    username: str
-    hashed_password: str
-
 @router.post("/register")
 async def register(username: str, password: str):
-    """Endpoint pour enregistrer un nouvel utilisateur."""
-    if username in fake_users_db:
+    """Enregistre un nouvel utilisateur dans MongoDB."""
+    # Vérifie si l'utilisateur existe déjà
+    existing_user = await mongodb.db.users.find_one({"username": username})
+    if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already registered"
         )
+    
+    # Hache le mot de passe et crée un nouvel utilisateur
     hashed_password = hash_password(password)
-    fake_users_db[username] = User(username=username, hashed_password=hashed_password)
+    user = User(username=username, hashed_password=hashed_password)
+    await mongodb.db.users.insert_one(user.dict())
     return {"message": "User registered successfully"}
 
 @router.post("/login")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    """Endpoint pour connecter un utilisateur et retourner un token."""
-    user_data = fake_users_db.get(form_data.username)
-    if not user_data or not verify_password(form_data.password, user_data.hashed_password):
+    """Connecte un utilisateur et retourne un token."""
+    user_data = await mongodb.db.users.find_one({"username": form_data.username})
+    if not user_data or not verify_password(form_data.password, user_data["hashed_password"]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password"
         )
-    return {"access_token": user_data.username, "token_type": "bearer"}
+    return {"access_token": user_data["username"], "token_type": "bearer"}
