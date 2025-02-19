@@ -1,14 +1,19 @@
 services:
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    build: ./backend
     ports:
       - "8000:8000"
     env_file:
       - .env
     depends_on:
       - mongodb
+
+  frontend:
+    build: ./frontend  # <-- Assurez-vous que ce chemin est correct
+    ports:
+      - "3000:80"  # <-- Nginx écoute sur le port 80
+    depends_on:
+      - backend
 
   mongodb:
     image: mongo:6.0
