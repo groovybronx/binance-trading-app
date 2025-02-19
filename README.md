@@ -57,4 +57,44 @@ Ce projet est une application de trading utilisant l'API Binance. Elle permet de
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 ```
 
-Vous pouvez copier ce contenu dans votre fichier `README.md` pour bien documenter votre projet.
+binance-trading-app/
+├── backend/
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── binance_api/
+│   │   │   │   ├── client.py
+│   │   │   │   └── websocket.py
+│   │   │   └── security.py  # Fichier pour le chiffrement et la sécurité
+│   │   ├── auth/
+│   │   │   ├── router.py    # Routes d'authentification
+│   │   │   └── utils.py     # Fonctions utilitaires (hachage, vérification)
+│   │   ├── trading/
+│   │   │   ├── models.py    # Modèles Pydantic pour le trading
+│   │   │   └── strategies/  # Dossier pour les stratégies de trading
+│   │   ├── config/
+│   │   │   ├── settings.py  # Configuration de l'application
+│   │   │   └── __init__.py
+│   │   ├── db/
+│   │   │   ├── mongodb.py   # Connexion à MongoDB
+│   │   │   └── models/      # Modèles MongoDB
+│   │   │       └── user.py  # Modèle utilisateur
+│   │   └── main.py          # Point d'entrée de l'application
+│   ├── tests/
+│   │   ├── test_auth.py     # Tests pour l'authentification
+│   │   └── test_trading.py  # Tests pour le module de trading
+│   ├── .env                 # Variables d'environnement
+│   ├── requirements.txt     # Dépendances Python
+│   └── Dockerfile           # Configuration Docker pour le backend
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── api/             # Appels API vers le backend
+│   │   ├── components/      # Composants React
+│   │   ├── pages/           # Pages de l'application
+│   │   └── App.tsx          # Composant principal
+│   ├── package.json         # Dépendances frontend
+│   └── Dockerfile           # Configuration Docker pour le frontend
+├── scripts/                 # Scripts utilitaires (ex : déploiement)
+├── .gitignore               # Fichiers à ignorer par Git
+├── docker-compose.yml       # Configuration Docker Compose
+└── README.md                # Documentation du projet
