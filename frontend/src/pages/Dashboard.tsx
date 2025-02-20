@@ -1,4 +1,3 @@
-// src/pages/Dashboard.tsx
 import React from 'react';
 
 const Dashboard = () => {
@@ -9,4 +8,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard; // Assurez-vous d'exporter le composant
+export default Dashboard; // Exportation par défaut
